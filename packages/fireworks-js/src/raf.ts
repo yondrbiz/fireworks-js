@@ -4,7 +4,7 @@ export class RequestAnimationFrame {
   tick = 0
 
   private rafId = 0
-  private fps = 60
+  private fps = 30
   private tolerance = 0.1
   private now: number
 
