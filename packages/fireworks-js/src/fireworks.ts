@@ -143,7 +143,7 @@ export class Fireworks {
       this.createTrace(x, y, withTrace)
     }
 
-    if (!this.waitStopRaf) {
+    if (!this.running && !this.waitStopRaf) {
       this.start()
       this.waitStop()
     }
