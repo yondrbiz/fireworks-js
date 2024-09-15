@@ -23,6 +23,7 @@ export namespace FireworksTypes {
     lineWidth: LineWidth
     lineStyle: LineStyle
     autoresize: boolean
+    vertical: boolean
   }
 
   export type LineStyle = 'round' | 'square'
@@ -112,6 +113,6 @@ export type RecursivePartial<T> = {
   [P in keyof T]?: T[P] extends (infer U)[]
     ? RecursivePartial<U>[]
     : T[P] extends object
-    ? RecursivePartial<T[P]>
-    : T[P]
+      ? RecursivePartial<T[P]>
+      : T[P]
 }

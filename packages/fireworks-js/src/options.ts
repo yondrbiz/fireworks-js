@@ -23,6 +23,7 @@ export class Options implements FireworksTypes.Options {
   lineWidth: FireworksTypes.LineWidth
   lineStyle: FireworksTypes.LineStyle
   autoresize: boolean
+  vertical: boolean
 
   constructor() {
     this.autoresize = true
@@ -37,6 +38,7 @@ export class Options implements FireworksTypes.Options {
     this.particles = 50
     this.friction = 0.95
     this.acceleration = 1.05
+    this.vertical = false
 
     this.hue = {
       min: 0,
