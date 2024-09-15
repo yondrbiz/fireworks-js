@@ -88,6 +88,13 @@ export namespace FireworksTypes {
     brightness: MinMax
     decay: MinMax
   }
+
+  export interface LaunchOptions {
+    count?: number
+    x?: number
+    y?: number
+    withTrace?: boolean
+  }
 }
 
 export type FireworksOptions = RecursivePartial<FireworksTypes.Options>

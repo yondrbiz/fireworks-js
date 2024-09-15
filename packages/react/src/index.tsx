@@ -1,6 +1,10 @@
 import React, { useEffect, useImperativeHandle, useRef } from 'react'
 import { Fireworks as FireworksJs } from 'fireworks-js'
-import type { FireworksHandlers, FireworksOptions } from 'fireworks-js'
+import type {
+  FireworksHandlers,
+  FireworksOptions,
+  FireworksTypes
+} from 'fireworks-js'
 
 interface FireworksProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode
@@ -23,8 +27,8 @@ const Fireworks = React.forwardRef<FireworksHandlers, FireworksProps>(
       start() {
         fireworks.current!.start()
       },
-      launch(count) {
-        fireworks.current!.launch(count)
+      launch(options: number | FireworksTypes.LaunchOptions) {
+        fireworks.current!.launch(options)
       },
       stop() {
         fireworks.current!.stop()
