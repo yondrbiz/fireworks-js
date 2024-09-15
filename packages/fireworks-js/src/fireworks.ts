@@ -124,9 +124,23 @@ export class Fireworks {
     this.ctx.clearRect(0, 0, this.width, this.height)
   }
 
-  launch(count = 1): void {
+  launch(options: number | FireworksTypes.LaunchOptions): void {
+    let count = 1
+    let x: number | undefined
+    let y: number | undefined
+    let withTrace = true
+
+    if (typeof options === 'number') {
+      count = options
+    } else {
+      count = options.count ?? 1
+      x = options.x
+      y = options.y
+      withTrace = options.withTrace ?? true
+    }
+
     for (let i = 0; i < count; i++) {
-      this.createTrace()
+      this.createTrace(x, y, withTrace)
     }
 
     if (!this.waitStopRaf) {
@@ -193,7 +207,7 @@ export class Fireworks {
     this.drawExplosion()
   }
 
-  private createTrace(): void {
+  private createTrace(x?: number, y?: number, withTrace: boolean = true): void {
     const {
       hue,
       rocketsPoint,
@@ -205,19 +219,32 @@ export class Fireworks {
       vertical
     } = this.opts
 
+    const random = x === undefined || y === undefined
+
     var sx = (this.width * randomInt(rocketsPoint.min, rocketsPoint.max)) / 100
     var sy = this.height
-    const mx = (this.mouse.x && mouse.move) || this.mouse.active
-    const my = (this.mouse.y && mouse.move) || this.mouse.active
-    const dx = mx
-      ? this.mouse.x
-      : randomInt(boundaries.x, boundaries.width - boundaries.x * 2)
-    const dy = my
-      ? this.mouse.y
-      : randomInt(boundaries.y, boundaries.height * 0.5)
+    var dx = 0
+    var dy = 0
 
-    if (vertical) {
+    if (random) {
+      var mx = (this.mouse.x && mouse.move) || this.mouse.active
+      var my = (this.mouse.y && mouse.move) || this.mouse.active
+      dx = mx
+        ? this.mouse.x
+        : randomInt(boundaries.x, boundaries.width - boundaries.x * 2)
+      dy = my ? this.mouse.y : randomInt(boundaries.y, boundaries.height * 0.5)
+    } else {
+      dx = x
+      dy = y
+    }
+
+    if (withTrace && vertical) {
       sx = dx
+    }
+
+    if (!withTrace) {
+      sx = dx
+      sy = dy
     }
 
     this.traces.push(

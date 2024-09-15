@@ -1,7 +1,11 @@
 <script lang="ts" setup>
 import { Fireworks } from 'fireworks-js'
 import { defineExpose, onMounted, onUnmounted, ref } from 'vue'
-import type { FireworksHandlers, FireworksOptions } from 'fireworks-js'
+import type {
+  FireworksHandlers,
+  FireworksOptions,
+  FireworksTypes
+} from 'fireworks-js'
 import type { PropType } from 'vue'
 
 const props = defineProps({
@@ -39,8 +43,8 @@ defineExpose<FireworksHandlers>({
   start() {
     fireworks.value!.start()
   },
-  launch(count) {
-    fireworks.value!.launch(count)
+  launch(options: number | FireworksTypes.LaunchOptions) {
+    fireworks.value!.launch(options)
   },
   stop() {
     fireworks.value!.stop()
